@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>FurniLogistics - Оптимізація доставки меблів в Україні</title>
+	<link rel="stylesheet" href="./styles/styles.css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+</head>
+
+<body>
+<header>
+	<div class="container">
+		<nav>
+			<a href="#" class="logo">
+				<!-- <img src="https://via.placeholder.com/40x40/0057b7/ffffff?text=FL" alt="FurniLogistics" class="logo-img">-->
+				Furni<span>Logistics</span>
+			</a>
+			<ul class="nav-links">
+				<li><a href="#about">Про систему</a></li>
+				<li><a href="#features">Можливості</a></li>
+				<li><a href="#coverage">Покриття</a></li>
+				<li><a href="#how-it-works">Як це працює</a></li>
+				<li><a href="#benefits">Переваги</a></li>
+				<li><a href="#contact">Контакти</a></li>
+				<li><a href="track.html" class="track-btn">Відстежити замовлення</a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<section class="hero">
+	<div class="container">
+		<h1>Оптимізація доставки меблів для українських компаній</h1>
+		<p>Інтелектуальна система логістики, що враховує особливості українських доріг, міст та клієнтів. Зменшуйте
+			витрати на доставку та підвищуйте задоволеність клієнтів</p>
+		<div class="btn-group">
+			<a href="#contact" class="btn">Замовити доставку</a>
+			<a href="#how-it-works" class="btn btn-accent">Дізнатися більше</a>
+		</div>
+	</div>
+</section>
+
+<section id="about" class="about">
+	<div class="container">
+		<h2 class="section-title">Про систему FurniLogistics</h2>
+		<p style="text-align: center; max-width: 900px; margin: 0 auto 2.5rem; font-size: 1.2rem;">
+			Розроблена українськими фахівцями спеціально для меблевих компаній, які працюють на ринку України.
+			Наша система враховує специфіку української логістики: стан доріг, особливості міської інфраструктури,
+			сезонні фактори та звички клієнтів. Використовуючи сучасні технології штучного інтелекту, ми допомагаємо
+			компаніям заощаджувати до 30% витрат на доставку.
+		</p>
+		<div style="text-align: center;">
+			<a href="#features" class="btn">Основні можливості</a>
+		</div>
+	</div>
+</section>
+
+<section id="features" class="features-section">
+	<div class="container">
+		<h2 class="section-title">Можливості системи</h2>
+		<div class="features">
+			<div class="feature-card">
+				<div class="feature-icon"><i class="fas fa-route"></i></div>
+				<h3>Маршрутизація для України</h3>
+				<p>Алгоритми враховують стан українських доріг, перетини з ЄС, зони АТО, об'їзди та інші локальні
+					особливості.</p>
+			</div>
+			<div class="feature-card">
+				<div class="feature-icon"><i class="fas fa-truck-loading"></i></div>
+				<h3>Розрахунок завантаження</h3>
+				<p>Оптимальне розміщення меблів у транспорті з урахуванням габаритів, ваги та послідовності
+					доставки.</p>
+			</div>
+			<div class="feature-card">
+				<div class="feature-icon"><i class="fas fa-hryvnia"></i></div>
+				<h3>Розрахунок вартості</h3>
+				<p>Точний розрахунок вартості доставки з урахуванням палива, зносу авто, зарплат водіїв та інших
+					витрат.</p>
+			</div>
+			<div class="feature-card">
+				<div class="feature-icon"><i class="fas fa-map-marked-alt"></i></div>
+				<h3>Навігація Nova Poshta</h3>
+				<p>Інтеграція з відділеннями Нової Пошти для зручної доставки в невеликі населені пункти.</p>
+			</div>
+			<div class="feature-card">
+				<div class="feature-icon"><i class="fas fa-sms"></i></div>
+				<h3>SMS-сповіщення</h3>
+				<p>Автоматичні сповіщення клієнтів про статус замовлення українською мовою.</p>
+			</div>
+			<div class="feature-card">
+				<div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+				<h3>Аналітика для керівників</h3>
+				<p>Зручні звіти та дашборди для аналізу ефективності логістики у гривнях.</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="coverage" class="coverage-map">
+	<div class="container">
+		<h2 class="section-title">Наше покриття по Україні</h2>
+		<p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; font-size: 1.1rem;">
+			Ми працюємо по всій території України, оптимізуючи доставку меблів у всі регіони
+		</p>
+
+		<!-- Карта -->
+		<div class="map-container" style="margin-bottom: 2rem;">
+			<div id="ukraine-map"></div>
+		</div>
+
+		<!-- Легенда (окремий блок) -->
+		<div class="legend-container"
+		     style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; max-width: 800px; margin: 0 auto;">
+			<h3 style="text-align: center; margin-bottom: 1rem;">Легенда карти</h3>
+			<div class="map-legend" style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+				<div class="legend-item" style="display: flex; align-items: center; gap: 0.5rem;">
+					<div class="legend-color"
+					     style="width: 20px; height: 20px; background: #0057b7; border-radius: 4px;"></div>
+					<span>Основні міста</span>
+				</div>
+				<div class="legend-item" style="display: flex; align-items: center; gap: 0.5rem;">
+					<div class="legend-color"
+					     style="width: 20px; height: 20px; background: #ffd700; border-radius: 4px;"></div>
+					<span>Логістичні центри</span>
+				</div>
+				<div class="legend-item" style="display: flex; align-items: center; gap: 0.5rem;">
+					<div class="legend-color"
+					     style="width: 20px; height: 20px; background: #2ecc71; border-radius: 4px;"></div>
+					<span>Партнерські склади</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="how-it-works" class="how-it-works">
+	<div class="container">
+		<h2 class="section-title">Як працює наша система</h2>
+		<div class="steps">
+			<div class="step">
+				<h3>Аналіз замовлення</h3>
+				<p>Система отримує дані про замовлення: адресу, габарити меблів, особливі вимоги (збірка, підйом на
+					поверх). Враховує українські реалії - наявність ліфта, парковку, в'їзд у двір.</p>
+			</div>
+			<div class="step">
+				<h3>Планування маршруту</h3>
+				<p>На основі даних про поточний стан доріг, пробок, ремонтних робіт та інших факторів система будує
+					оптимальний маршрут. Особлива увага приділяється містам зі складним трафіком - Київ, Харків,
+					Одеса.</p>
+			</div>
+			<div class="step">
+				<h3>Формування команди</h3>
+				<p>Для великогабаритних меблів система підбирає необхідну кількість грузчиків з урахуванням ваги та
+					розмірів предметів, а також місцевих умов доставки.</p>
+			</div>
+			<div class="step">
+				<h3>Відстеження в реальному часі</h3>
+				<p>Клієнт та менеджер бачать поточне місцезнаходження авто на мапі України. Система автоматично
+					повідомляє про затримки через ДТП, перекриття доріг тощо.</p>
+			</div>
+			<div class="step">
+				<h3>Звітність та аналіз</h3>
+				<p>Після доставки система аналізує ефективність маршруту, витрати часу та палива, задоволеність
+					клієнта. Формуються звіти з рекомендаціями для покращення.</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="benefits" class="benefits">
+	<div class="container">
+		<h2 class="section-title">Чому обирають FurniLogistics</h2>
+		<div style="max-width: 900px; margin: 0 auto;">
+			<div class="benefit-item">
+				<div class="benefit-icon"><i class="fas fa-hryvnia"></i></div>
+				<div class="benefit-content">
+					<h3>Економія коштів</h3>
+					<p>Українські компанії заощаджують в середньому 25-40% витрат на доставку завдяки оптимізації
+						маршрутів та завантаження транспорту.</p>
+				</div>
+			</div>
+			<div class="benefit-item">
+				<div class="benefit-icon"><i class="fas fa-clock"></i></div>
+				<div class="benefit-content">
+					<h3>Економія часу</h3>
+					<p>Зменшення часу планування маршрутів з годин до хвилин. Водії проводять більше часу в дорозі,
+						а не в очікуванні завдань.</p>
+				</div>
+			</div>
+			<div class="benefit-item">
+				<div class="benefit-icon"><i class="fas fa-smile"></i></div>
+				<div class="benefit-content">
+					<h3>Щасливі клієнти</h3>
+					<p>Точні прогнози часу доставки (з точністю до 30 хвилин) та можливість вибору зручного часу
+						підвищують лояльність клієнтів.</p>
+				</div>
+			</div>
+			<div class="benefit-item">
+				<div class="benefit-icon"><i class="fas fa-shield-alt"></i></div>
+				<div class="benefit-content">
+					<h3>Надійність</h3>
+					<p>Хмарна інфраструктура розміщена в Україні, що забезпечує стабільну роботу навіть при поганому
+						інтернет-з'єднанні.</p>
+				</div>
+			</div>
+			<div class="benefit-item">
+				<div class="benefit-icon"><i class="fas fa-hand-holding-usd"></i></div>
+				<div class="benefit-content">
+					<h3>Гнучкі тарифи</h3>
+					<p>Оплата в гривнях без прив'язки до іноземних валют. Можливість оплатити тільки ті функції, які
+						потрібні вашій компанії.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="delivery-fleet">
+	<div class="container">
+		<h2 class="section-title">Наш транспортний парк</h2>
+		<p class="section-subtitle">Сучасний спеціалізований транспорт для безпечної доставки меблів</p>
+
+		<div class="fleet-grid">
+			<!-- Фото 1 -->
+			<div class="fleet-item">
+				<img src="https://vivatrans.com.ua/wp-content/uploads/2022/09/perevezennya-z-gidrobortom-u-kievi.jpg"
+				     alt="Вантажівка для перевезення меблів">
+				<div class="fleet-info">
+					<h3>Вантажівки з гідробортом</h3>
+					<p>Зручне завантаження важких меблів з гідравлічною платформою</p>
+				</div>
+			</div>
+
+			<!-- Фото 2 -->
+			<div class="fleet-item">
+				<img src="https://ryderukraine.com/wp-content/uploads/2023/05/terms-02.webp"
+				     alt="Фургон для доставки">
+				<div class="fleet-info">
+					<h3>Закриті фургони</h3>
+					<p>Захист меблів від опадів та пошкоджень під час транспортування</p>
+				</div>
+			</div>
+
+			<!-- Фото 3 -->
+			<div class="fleet-item">
+				<img src="https://zubr-taxi.com.ua/wp-content/uploads/2023/10/P360-6x2-1.webp"
+				     alt="Транспорт для великогабаритних меблів">
+				<div class="fleet-info">
+					<h3>Транспорт для великогабаритів</h3>
+					<p>Спеціальні машини для перевезення шаф, ліжок, кухонь</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="contact" class="contact">
+	<div class="container">
+		<h2 class="section-title">Зв'яжіться з нами</h2>
+		<div class="contact-form">
+    <form id="deliveryForm">
+        <div class="form-group">
+            <label for="name">Ваше ім'я*</label>
+            <input type="text" id="name" required placeholder="Іван Іванов">
+        </div>
+        <div class="form-group">
+            <label for="company">Назва компанії*</label>
+            <input type="text" id="company" required placeholder="Назва вашої меблевої компанії">
+        </div>
+        <div class="form-group">
+            <label for="email">Email*</label>
+            <input type="email" id="email" required placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+            <label for="phone">Телефон*</label>
+            <input type="tel" id="phone" required placeholder="+380 XX XXX XX XX">
+        </div>
+        <div class="form-group">
+            <label>Адреси доставки*</label>
+            <div id="addressesContainer">
+                <div class="address-input-group">
+                    <input type="text" name="deliveryAddress" required 
+                           placeholder="Введіть адресу доставки" class="address-input">
+                    <button type="button" class="btn-remove-address" style="display: none;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <button type="button" id="addAddressBtn" class="btn btn-secondary" 
+                    style="margin-top: 0.5rem; padding: 0.5rem 1rem;">
+                <i class="fas fa-plus"></i> Додати ще адресу
+            </button>
+        </div>
+        
+        <div class="form-group">
+            <label for="message">Ваше повідомлення</label>
+            <textarea id="message" placeholder="Опишіть ваші потреби в оптимізації логістики..."></textarea>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn">Надіслати запит</button>
+        </div>
+    </form>
+</div>
+	</div>
+	<div class="container" id="order" style="visibility: hidden">
+		<h2 class="section-title">Ваше замовлення</h2>
+	</div>
+</section>
+
+<footer>
+	<div class="container">
+		<div class="footer-content">
+			<div class="footer-column">
+				<h3>FurniLogistics</h3>
+				<p>Інтелектуальна система оптимізації логістики для українських меблевих компаній</p>
+				<div class="social-links">
+					<a href="#"><i class="fab fa-facebook-f"></i></a>
+					<a href="#"><i class="fab fa-linkedin-in"></i></a>
+					<a href="#"><i class="fab fa-telegram-plane"></i></a>
+					<a href="#"><i class="fab fa-youtube"></i></a>
+				</div>
+			</div>
+			<div class="footer-column">
+				<h3>Розділи</h3>
+				<ul class="footer-links">
+					<li><a href="#about">Про систему</a></li>
+					<li><a href="#features">Можливості</a></li>
+					<li><a href="#coverage">Покриття</a></li>
+					<li><a href="#how-it-works">Як це працює</a></li>
+					<li><a href="#benefits">Переваги</a></li>
+					<li><a href="#contact">Контакти</a></li>
+					<li><a href="track.html" class="track-btn">Відстежити замовлення</a></li>
+				</ul>
+			</div>
+			<div class="footer-column">
+				<h3>Контакти</h3>
+				<ul class="footer-links">
+					<li><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> м. Київ, вул. Хрещатик, 1
+					</li>
+					<li><i class="fas fa-phone" style="margin-right: 10px;"></i> +380 44 123 45 67</li>
+					<li><i class="fas fa-envelope" style="margin-right: 10px;"></i> info@furnilogistics.ua</li>
+					<li><i class="fas fa-clock" style="margin-right: 10px;"></i> Пн-Пт: 9:00 - 18:00</li>
+				</ul>
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<p>© 2023 FurniLogistics. Усі права захищені. Розроблено в Україні з ❤️</p>
+		</div>
+	</div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script>
+    // Ініціалізація карти після завантаження сторінки
+    document.addEventListener('DOMContentLoaded', function () {
+        // Створюємо карту
+        const map = L.map('ukraine-map').setView([48.3794, 31.1656], 6);
+
+        // Додаємо базовий шар карти
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 8,
+            minZoom: 5
+        }).addTo(map);
+
+        // Додаємо маркери для основних міст
+        const majorCities = [
+            {name: "Київ", coords: [50.4501, 30.5234]},
+            {name: "Харків", coords: [49.9935, 36.2304]},
+            {name: "Одеса", coords: [46.4825, 30.7233]},
+            {name: "Дніпро", coords: [48.4647, 35.0462]},
+            {name: "Львів", coords: [49.8397, 24.0297]},
+            {name: "Запоріжжя", coords: [47.8388, 35.1396]},
+            {name: "Івано-Франківськ", coords: [48.9226, 24.7111]},
+            {name: "Тернопіль", coords: [49.5535, 25.5948]},
+            {name: "Вінниця", coords: [49.2331, 28.4682]},
+            {name: "Чернівці", coords: [48.2917, 25.9354]},
+            {name: "Житомир", coords: [50.2547, 28.6587]},
+            {name: "Хмельницький", coords: [49.4229, 26.9871]},
+            {name: "Рівне", coords: [50.6199, 26.2516]},
+            {name: "Луцьк", coords: [50.7476, 25.3254]},
+            {name: "Ужгород", coords: [48.6208, 22.2879]},
+            {name: "Черкаси", coords: [49.4444, 32.0598]},
+            {name: "Полтава", coords: [49.5883, 34.5514]},
+            {name: "Суми", coords: [50.9077, 34.7981]},
+            {name: "Чернігів", coords: [51.4982, 31.2893]},
+            {name: "Миколаїв", coords: [46.9750, 31.9946]},
+            {name: "Херсон", coords: [46.6354, 32.6169]},
+            {name: "Кропивницький", coords: [48.5132, 32.2597]}
+        ];
+
+        // Додаємо маркери для логістичних центрів
+        const logisticsCenters = [
+            {name: "Логістичний центр (Київ)", coords: [50.4022, 30.6189]},
+            {name: "Логістичний центр (Львів)", coords: [49.8003, 24.0129]},
+            {name: "Логістичний центр (Одеса)", coords: [46.4619, 30.7234]},
+            {name: "Логістичний центр (Харків)", coords: [49.9808, 36.2527]}
+        ];
+
+        // Додаємо маркери для партнерських складів
+        const partnerWarehouses = [
+            {name: "Партнерський склад (Івано-Франківськ)", coords: [48.9046, 24.7111]},
+            {name: "Партнерський склад (Дніпро)", coords: [48.4347, 35.0381]},
+            {name: "Партнерський склад (Запоріжжя)", coords: [47.8456, 35.1581]},
+            {name: "Партнерський склад (Вінниця)", coords: [49.2381, 28.4732]}
+        ];
+
+        // Додаємо маркери на карту
+        majorCities.forEach(city => {
+            L.circleMarker(city.coords, {
+                color: '#0057b7',
+                fillColor: '#0057b7',
+                fillOpacity: 0.8,
+                radius: 8
+            }).addTo(map)
+                .bindPopup(`<b>${city.name}</b><br>${city.delivery}`);
+        });
+
+        logisticsCenters.forEach(center => {
+            L.circleMarker(center.coords, {
+                color: '#ffd700',
+                fillColor: '#ffd700',
+                fillOpacity: 0.8,
+                radius: 10
+            }).addTo(map)
+                .bindPopup(`<b>${center.name}</b>`);
+        });
+
+        partnerWarehouses.forEach(warehouse => {
+            L.circleMarker(warehouse.coords, {
+                color: '#2ecc71',
+                fillColor: '#2ecc71',
+                fillOpacity: 0.8,
+                radius: 6
+            }).addTo(map)
+                .bindPopup(`<b>${warehouse.name}</b>`);
+        });
+
+        // Додаємо контур України
+        fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries/UKR.geo.json')
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: {
+                        color: '#0057b7',
+                        weight: 2,
+                        opacity: 1,
+                        fillOpacity: 0.1
+                    }
+                }).addTo(map);
+            })
+            .catch(error => {
+                console.error('Помилка завантаження геоданих України:', error);
+            });
+    });
+</script>
+<script src="./scripts/orders/order.create.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const addressesContainer = document.getElementById('addressesContainer');
+        const addAddressBtn = document.getElementById('addAddressBtn');
+        
+        // Додавання нової адреси
+        addAddressBtn.addEventListener('click', function() {
+            const newAddressGroup = document.createElement('div');
+            newAddressGroup.className = 'address-input-group';
+            
+            newAddressGroup.innerHTML = `
+                <input type="text" name="deliveryAddress" required 
+                       placeholder="Введіть адресу доставки" class="address-input">
+                <button type="button" class="btn-remove-address">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            addressesContainer.appendChild(newAddressGroup);
+            
+            // Показуємо кнопки видалення для всіх полів, крім першого
+            updateRemoveButtonsVisibility();
+        });
+        
+        // Видалення адреси
+        addressesContainer.addEventListener('click', function(e) {
+            if (e.target.classList.contains('btn-remove-address') || 
+                e.target.closest('.btn-remove-address')) {
+                const addressGroup = e.target.closest('.address-input-group');
+                if (addressGroup) {
+                    addressGroup.remove();
+                    updateRemoveButtonsVisibility();
+                }
+            }
+        });
+        
+        // Оновлення видимості кнопок видалення
+        function updateRemoveButtonsVisibility() {
+            const addressGroups = document.querySelectorAll('.address-input-group');
+            addressGroups.forEach((group, index) => {
+                const removeBtn = group.querySelector('.btn-remove-address');
+                if (removeBtn) {
+                    removeBtn.style.display = index === 0 ? 'none' : 'block';
+                }
+            });
+        }
+        
+        // Обробка форми
+        document.getElementById('deliveryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Збір даних з форми
+            const formData = {
+                name: document.getElementById('name').value,
+                company: document.getElementById('company').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                addresses: Array.from(document.querySelectorAll('[name="deliveryAddress"]')).map(input => input.value),
+                message: document.getElementById('message').value
+            };
+            
+            console.log('Відправлені дані:', formData);
+            // Тут буде відправка даних на сервер
+            
+            alert('Замовлення успішно відправлено! Ми зв\'яжемося з вами найближчим часом.');
+            this.reset();
+        });
+    });
+</script>
+</body>
+
+</html>
