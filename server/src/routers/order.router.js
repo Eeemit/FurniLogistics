@@ -1,9 +1,9 @@
 const {Router} = require("express");
 
-const commonMiddleware = require("../middlewares/common.middleware");
-const orderMiddleware = require("../middlewares/order.middleware");
-const OrderValidator = require("../validators/order.validator");
-const orderController =  require("../controllers/order.controller");
+const {commonMiddleware} = require("../middlewares/common.middleware");
+const {orderMiddleware} = require("../middlewares/order.middleware");
+const {OrderValidator} = require("../validators/order.validator");
+const {orderController} = require("../controllers/order.controller");
 
 const router = Router();
 
@@ -19,4 +19,6 @@ router.get(
     orderController.findById
 )
 
-module.exports = router
+const orderRouter = router;
+
+module.exports = {orderRouter}

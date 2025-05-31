@@ -1,4 +1,4 @@
-const orderService = require("../services/order.service");
+const {orderService} = require("../services/order.service");
 
 class OrderController {
     async create(req, res, next) {
@@ -23,4 +23,6 @@ class OrderController {
     }
 }
 
-module.exports = new OrderController()
+const orderController = new OrderController();
+
+module.exports = {orderController}

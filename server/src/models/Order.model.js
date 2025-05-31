@@ -18,6 +18,10 @@ const orderSchema = new Schema(
             type: String,
             required: true,
         },
+        city: {
+            type: String,
+            required: true,
+        },
         addresses: {
             type: [String],
             required: true,
@@ -32,4 +36,6 @@ const orderSchema = new Schema(
     }
 );
 
-module.exports = model("order", orderSchema)
+const Order = model("order", orderSchema);
+
+module.exports = {Order}

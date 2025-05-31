@@ -1,5 +1,5 @@
 const {isObjectIdOrHexString} = require("mongoose");
-const ApiError = require("../errors/api.error");
+const {ApiError} = require("../errors/api.error");
 
 class CommonMiddleware {
     isIdValid(field) {
@@ -39,4 +39,6 @@ class CommonMiddleware {
     }
 }
 
-module.exports = new CommonMiddleware()
+const commonMiddleware = new CommonMiddleware();
+
+module.exports = {commonMiddleware}

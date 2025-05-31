@@ -1,5 +1,5 @@
-const ApiError = require("../errors/api.error");
-const Order = require("../models/Order.model");
+const {ApiError} = require("../errors/api.error");
+const {Order} = require("../models/Order.model");
 
 class OrderMiddleware {
     isOrderExist(idField) {
@@ -18,4 +18,6 @@ class OrderMiddleware {
     }
 }
 
-module.exports = new OrderMiddleware()
+const orderMiddleware = new OrderMiddleware();
+
+module.exports = {orderMiddleware}

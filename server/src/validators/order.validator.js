@@ -7,6 +7,7 @@ class OrderValidator {
     static companyName = Joi.string().max(45).trim()
     static phone = Joi.string().regex(PHONE).trim()
     static email = Joi.string().email({minDomainSegments: 2, tlds: {allow: false}})
+    static city = Joi.string().max(45).trim()
     static addresses = Joi.array().items(Joi.string().max(100).trim())
     static message = Joi.string().max(200).trim()
 
@@ -15,9 +16,10 @@ class OrderValidator {
         companyName: this.companyName.required(),
         phone: this.phone.required(),
         email: this.email.required(),
+        city: this.city.required(),
         addresses: this.addresses.required(),
         message: this.message
     })
 }
 
-module.exports = OrderValidator
+module.exports = {OrderValidator}
