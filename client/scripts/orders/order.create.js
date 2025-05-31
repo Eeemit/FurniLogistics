@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
             companyName: document.getElementById('company').value,
             email: document.getElementById('email').value,
             phone: document.getElementById('phone').value,
-            addresses: [document.getElementById('address').value],
+            city: document.getElementById("city").value,
+            addresses: Array.from(document.querySelectorAll('[name="deliveryAddress"]')).map(input => input.value),
         };
 
         const messageValue = document.getElementById('message').value;
@@ -36,6 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 orderDiv.style.visibility = "visible";
+
+                alert('Замовлення успішно відправлено! Ми зв\'яжемося з вами найближчим часом.');
             })
             .catch(err => {
                 console.error('Помилка при надсиланні форми:', err);

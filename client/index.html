@@ -504,27 +504,6 @@
                 }
             });
         }
-        
-        // Обробка форми
-        document.getElementById('deliveryForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Збір даних з форми
-            const formData = {
-                name: document.getElementById('name').value,
-                company: document.getElementById('company').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                addresses: Array.from(document.querySelectorAll('[name="deliveryAddress"]')).map(input => input.value),
-                message: document.getElementById('message').value
-            };
-            
-            console.log('Відправлені дані:', formData);
-            // Тут буде відправка даних на сервер
-            
-            alert('Замовлення успішно відправлено! Ми зв\'яжемося з вами найближчим часом.');
-            this.reset();
-        });
     });
 </script>
 </body>
