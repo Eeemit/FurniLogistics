@@ -261,76 +261,76 @@
 	<div class="container">
 		<h2 class="section-title">Зв'яжіться з нами</h2>
 		<div class="contact-form">
-    <form id="deliveryForm">
-        <div class="form-group">
-            <label for="name">Ваше ім'я*</label>
-            <input type="text" id="name" required placeholder="Іван Іванов">
-        </div>
-        <div class="form-group">
-            <label for="company">Назва компанії*</label>
-            <input type="text" id="company" required placeholder="Назва вашої меблевої компанії">
-        </div>
-        <div class="form-group">
-            <label for="email">Email*</label>
-            <input type="email" id="email" required placeholder="your@email.com">
-        </div>
-        <div class="form-group">
-            <label for="phone">Телефон*</label>
-            <input type="tel" id="phone" required placeholder="+380 XX XXX XX XX">
-        </div>
-		<div class="form-group">
-                        <label for="volume">Місто*</label>
-                        <select id="volume">
-                            <option value="Kyiv">Київ</option>
-                            <option value="Kharkiv">Харків</option>
-                            <option value="Odesa">Одеса</option>
-                            <option value="Dnipro">Дніпро</option>
-                            <option value="Lviv">Львів</option>
-							<option value="Zaporozhye">Запоріжжя</option>
-							<option value="Ivano-Frankivsk">Івано-Франківськ</option>
-							<option value="Ternopil">Тернопіль</option>
-							<option value="Vinnytsia">Вінниця</option>
-							<option value="Chernivtsi">Чернівці</option>
-							<option value="Zhytomyr">Житомир</option>
-							<option value="Khmelnytskyi">Хмельницький</option>
-							<option value="Rivne">Рівне</option>
-							<option value="Lutsk">Луцьк</option>
-							<option value="Uzhhorod">Ужгород</option>
-							<option value="Cherkasy">Черкаси</option>
-							<option value="Poltava">Полтава</option>
-							<option value="Sumy">Суми</option>
-							<option value="Chernihiv">Чернігів</option>
-							<option value="Mykolayiv">Миколаїв</option>
-							<option value="Kherson">Херсон</option>
-							<option value="Kropyvnytskyi">Кропивницький</option>
-							 </select>
-	    </div>
-        <div class="form-group">
-            <label>Адреси доставки*</label>
-            <div id="addressesContainer">
-                <div class="address-input-group">
-                    <input type="text" name="deliveryAddress" required 
-                           placeholder="Введіть адресу доставки" class="address-input">
-                    <button type="button" class="btn-remove-address" style="display: none;">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div>
-            <button type="button" id="addAddressBtn" class="btn btn-secondary" 
-                    style="margin-top: 0.5rem; padding: 0.5rem 1rem;">
-                <i class="fas fa-plus"></i> Додати ще адресу
-            </button>
-        </div>
-        
-        <div class="form-group">
-            <label for="message">Ваше повідомлення</label>
-            <textarea id="message" placeholder="Опишіть ваші потреби в оптимізації логістики..."></textarea>
-        </div>
-        <div class="form-actions">
-            <button type="submit" class="btn">Надіслати запит</button>
-        </div>
-    </form>
-</div>
+			<form id="deliveryForm">
+				<div class="form-group">
+					<label for="name">Ваше ім'я*</label>
+					<input type="text" id="name" required placeholder="Іван Іванов">
+				</div>
+				<div class="form-group">
+					<label for="company">Назва компанії*</label>
+					<input type="text" id="company" required placeholder="Назва вашої меблевої компанії">
+				</div>
+				<div class="form-group">
+					<label for="email">Email*</label>
+					<input type="email" id="email" required placeholder="your@email.com">
+				</div>
+				<div class="form-group">
+					<label for="phone">Телефон*</label>
+					<input type="tel" id="phone" required placeholder="+380 XX XXX XX XX">
+				</div>
+				<div class="form-group">
+					<label for="city">Місто*</label>
+					<select id="city">
+						<option value="Київ">Київ</option>
+						<option value="Харків">Харків</option>
+						<option value="Одеса">Одеса</option>
+						<option value="Дніпро">Дніпро</option>
+						<option value="Львів">Львів</option>
+						<option value="Запоріжжя">Запоріжжя</option>
+						<option value="Івано-Франківськ">Івано-Франківськ</option>
+						<option value="Тернопіль">Тернопіль</option>
+						<option value="Вінниця">Вінниця</option>
+						<option value="Чернівці">Чернівці</option>
+						<option value="Житомир">Житомир</option>
+						<option value="Хмельницький">Хмельницький</option>
+						<option value="Рівне">Рівне</option>
+						<option value="Луцьк">Луцьк</option>
+						<option value="Ужгород">Ужгород</option>
+						<option value="Черкаси">Черкаси</option>
+						<option value="Полтава">Полтава</option>
+						<option value="Суми">Суми</option>
+						<option value="Чернігів">Чернігів</option>
+						<option value="Миколаїв">Миколаїв</option>
+						<option value="Херсон">Херсон</option>
+						<option value="Кропивницький">Кропивницький</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Адреси доставки*</label>
+					<div id="addressesContainer">
+						<div class="address-input-group">
+							<input type="text" name="deliveryAddress" required
+							       placeholder="Введіть адресу доставки" class="address-input">
+							<button type="button" class="btn-remove-address" style="display: none;">
+								<i class="fas fa-times"></i>
+							</button>
+						</div>
+					</div>
+					<button type="button" id="addAddressBtn" class="btn btn-secondary"
+					        style="margin-top: 0.5rem; padding: 0.5rem 1rem;">
+						<i class="fas fa-plus"></i> Додати ще адресу
+					</button>
+				</div>
+
+				<div class="form-group">
+					<label for="message">Ваше повідомлення</label>
+					<textarea id="message" placeholder="Опишіть ваші потреби в оптимізації логістики..."></textarea>
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn">Надіслати запит</button>
+				</div>
+			</form>
+		</div>
 	</div>
 	<div class="container" id="order" style="visibility: hidden">
 		<h2 class="section-title">Ваше замовлення</h2>
@@ -486,15 +486,15 @@
 </script>
 <script src="./scripts/orders/order.create.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const addressesContainer = document.getElementById('addressesContainer');
         const addAddressBtn = document.getElementById('addAddressBtn');
-        
+
         // Додавання нової адреси
-        addAddressBtn.addEventListener('click', function() {
+        addAddressBtn.addEventListener('click', function () {
             const newAddressGroup = document.createElement('div');
             newAddressGroup.className = 'address-input-group';
-            
+
             newAddressGroup.innerHTML = `
                 <input type="text" name="deliveryAddress" required 
                        placeholder="Введіть адресу доставки" class="address-input">
@@ -502,16 +502,16 @@
                     <i class="fas fa-times"></i>
                 </button>
             `;
-            
+
             addressesContainer.appendChild(newAddressGroup);
-            
+
             // Показуємо кнопки видалення для всіх полів, крім першого
             updateRemoveButtonsVisibility();
         });
-        
+
         // Видалення адреси
-        addressesContainer.addEventListener('click', function(e) {
-            if (e.target.classList.contains('btn-remove-address') || 
+        addressesContainer.addEventListener('click', function (e) {
+            if (e.target.classList.contains('btn-remove-address') ||
                 e.target.closest('.btn-remove-address')) {
                 const addressGroup = e.target.closest('.address-input-group');
                 if (addressGroup) {
@@ -520,7 +520,7 @@
                 }
             }
         });
-        
+
         // Оновлення видимості кнопок видалення
         function updateRemoveButtonsVisibility() {
             const addressGroups = document.querySelectorAll('.address-input-group');

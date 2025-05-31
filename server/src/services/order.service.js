@@ -28,31 +28,29 @@ class OrderService {
 
             const geocoded = await Promise.all(addresses.map(async (addr, i) => {
                 const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(addr)}&format=json&limit=1`;
-                const res = await axios.get(url, { headers: { 'User-Agent': 'logistics-app' } });
+                const res = await axios.get(url, {headers: {'User-Agent': 'logistics-app'}});
                 const loc = res.data[0];
-                return { id: i, location: [parseFloat(loc.lon), parseFloat(loc.lat)] };
+                return {id: i + 1, location: [parseFloat(loc.lon), parseFloat(loc.lat)]};
             }));
 
-            const vehicleStart  = await Warehouse.findOne({city});
+            const vehicleStart = await Warehouse.findOne({city: city});
 
             const orsRes = await axios.post(
                 'https://api.openrouteservice.org/optimization',
                 {
                     jobs: geocoded,
-                    vehicles: [
-                        {
-                            id: 1,
-                            start: vehicleStart.coords,
-                        }
-                    ]
+                    vehicles: [{id: 1, profile:"driving-car", start: vehicleStart.coords}]
                 },
                 {
                     headers: {
-                        Authorization: ORS_API_KEY,
-                        'Content-Type': 'application/json'
+                        Authorization: ORS_API_KEY
                     }
                 }
             );
+
+            const steps = orsRes.data.routes[0].steps;
+
+            return steps.filter(step => step.type !== 'end').map(step => step.location);
         } catch (e) {
             throw new ApiError(e.message, e.status)
         }

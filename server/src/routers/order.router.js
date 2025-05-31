@@ -18,6 +18,12 @@ router.get(
     orderMiddleware.isOrderExist("orderId"),
     orderController.findById
 )
+router.get(
+    "/track/:orderId",
+    commonMiddleware.isIdValid("orderId"),
+    orderMiddleware.isOrderExist("orderId"),
+    orderController.findRoute
+)
 
 const orderRouter = router;
 

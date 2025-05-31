@@ -21,6 +21,17 @@ class OrderController {
             next(e)
         }
     }
+
+    async findRoute(req, res, next) {
+        try {
+            const {orderId} = req.params;
+            const order = await orderService.findRoute(orderId);
+
+            return res.json(order)
+        } catch (e) {
+            next(e)
+        }
+    }
 }
 
 const orderController = new OrderController();

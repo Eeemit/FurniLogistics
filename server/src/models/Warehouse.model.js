@@ -6,7 +6,7 @@ const warehouseSchema = new Schema(
             type: String,
             required: true,
         },
-        cords: {
+        coords: {
             type: [Number],
             required: true,
         }
