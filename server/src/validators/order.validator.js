@@ -20,6 +20,10 @@ class OrderValidator {
         addresses: this.addresses.required(),
         message: this.message
     })
+
+    static getOrder = Joi.object({
+        phone: this.phone.required()
+    })
 }
 
 module.exports = {OrderValidator}

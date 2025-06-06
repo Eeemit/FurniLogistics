@@ -12,16 +12,20 @@ router.post(
     commonMiddleware.isBodyValid(OrderValidator.create),
     orderController.create
 )
-router.get(
+router.post(
     "/:orderId",
     commonMiddleware.isIdValid("orderId"),
+    commonMiddleware.isBodyValid(OrderValidator.getOrder),
     orderMiddleware.isOrderExist("orderId"),
+    orderMiddleware.checkPhoneNumber("orderId"),
     orderController.findById
 )
-router.get(
+router.post(
     "/track/:orderId",
     commonMiddleware.isIdValid("orderId"),
+    commonMiddleware.isBodyValid(OrderValidator.getOrder),
     orderMiddleware.isOrderExist("orderId"),
+    orderMiddleware.checkPhoneNumber("orderId"),
     orderController.findRoute
 )
 

@@ -1,82 +1,85 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Відстежити замовлення - FurniLogistics</title>
-    <link rel="stylesheet" href="./styles/track.css"/>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Відстежити замовлення - FurniLogistics</title>
+	<link rel="stylesheet" href="./styles/track.css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+	<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css"/>
+	<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 </head>
 
 <body>
-    <div class="container">
-        <div class="tracking-container">
-            <h1>Відстежити замовлення</h1>
-            
-            <form id="trackingForm">
-                <div class="form-group">
-                    <label for="orderNumber">Номер замовлення</label>
-                    <input type="text" id="orderNumber" required placeholder="Введіть номер замовлення">
-                </div>
-                
-                <div class="form-group">
-                    <label for="phone">Номер телефону</label>
-                    <input type="tel" id="phone" required placeholder="+380 XX XXX XX XX">
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Відстежити</button>
-            </form>
-            
-            <div id="trackingResult" class="tracking-result">
-                <h2>Статус вашого замовлення #<span id="displayOrderNumber">????</span></h2>
-                
-                <div class="status-bar">
-                    <div class="status-step active">
-                        <div class="step-number">1</div>
-                        <p>Отримано</p>
-                    </div>
-                    <div class="status-step active">
-                        <div class="step-number">2</div>
-                        <p>Обробляється</p>
-                    </div>
-                    <div class="status-step">
-                        <div class="step-number">3</div>
-                        <p>Доставляється</p>
-                    </div>
-                    <div class="status-step">
-                        <div class="step-number">4</div>
-                        <p>Доставлено</p>
-                    </div>
-                </div>
-                
-                <div class="order-details">
-                    <h3>Деталі замовлення</h3>
-                    <p><strong>Замовник:</strong> <span id="customerName">????</span></p>
-                    <p><strong>Адреса доставки:</strong> <span id="deliveryAddress">????</span></p>
-                    <p><strong>Очікувана дата доставки:</strong> <span id="deliveryDate">????</span></p>
-                </div>
-            </div>
-            
-            <a href="index.html" class="back-link">← Повернутися на головну</a>
-        </div>
-    </div>
-    
-    <script>
-        document.getElementById('trackingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Отримуємо введені дані
-            const orderNumber = document.getElementById('orderNumber').value;
-            const phone = document.getElementById('phone').value;
-            
-            // Показуємо результат
-            document.getElementById('displayOrderNumber').textContent = orderNumber;
-            document.getElementById('trackingResult').style.display = 'block';
-            
-            // Прокручуємо до результату
-            document.getElementById('trackingResult').scrollIntoView({ behavior: 'smooth' });
-        });
-    </script>
+<div class="container">
+	<div class="tracking-container">
+		<h1>Відстежити замовлення</h1>
+
+		<form id="trackingForm">
+			<div class="form-group">
+				<label for="orderNumber">Номер замовлення</label>
+				<input type="text" id="orderNumber" required placeholder="Введіть номер замовлення">
+			</div>
+
+			<div class="form-group">
+				<label for="phone">Номер телефону</label>
+				<input type="tel" id="phone" required placeholder="+380 XX XXX XX XX">
+			</div>
+
+			<button type="submit" class="btn btn-primary">Відстежити</button>
+		</form>
+
+		<div id="trackingResult" class="tracking-result">
+			<h2>Статус вашого замовлення #<span id="displayOrderNumber">????</span></h2>
+
+			<div class="status-bar">
+				<div class="status-step active">
+					<div class="step-number">1</div>
+					<p>Отримано</p>
+				</div>
+				<div class="status-step active">
+					<div class="step-number">2</div>
+					<p>Обробляється</p>
+				</div>
+				<div class="status-step">
+					<div class="step-number">3</div>
+					<p>Доставляється</p>
+				</div>
+				<div class="status-step">
+					<div class="step-number">4</div>
+					<p>Доставлено</p>
+				</div>
+			</div>
+
+			<div class="order-details">
+				<h3>Деталі замовлення</h3>
+				<p><strong>Замовник:</strong> <span id="customerName">????</span></p>
+				<p><strong>Адреси доставки:</strong> <span id="deliveryAddress">????</span></p>
+				<!--                    <p><strong>Очікувана дата доставки:</strong> <span id="deliveryDate">????</span></p>-->
+				<div class="map-container">
+					<div id="map"></div>
+				</div>
+			</div>
+		</div>
+
+		<a href="index.html" class="back-link">← Повернутися на головну</a>
+	</div>
+</div>
+
+<script>
+    document.getElementById('trackingForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Показуємо результат
+        document.getElementById('displayOrderNumber').textContent = document.getElementById('orderNumber').value;
+        document.getElementById('trackingResult').style.display = 'block';
+
+        // Прокручуємо до результату
+        document.getElementById('trackingResult').scrollIntoView({behavior: 'smooth'});
+    });
+</script>
+<script src="./scripts/orders/order.get.js"></script>
 </body>
 </html>
