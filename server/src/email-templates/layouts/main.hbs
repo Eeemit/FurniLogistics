@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>E-mail</title>
+	<style>
+		.header {
+			color: white;
+			background-color: #0057b7;
+
+			width: 100%;
+			padding: 4px 35px;
+			box-sizing: border-box;
+		}
+
+		.body {
+			color: #212529;
+
+			width: 100%;
+			padding: 45px 35px;
+			box-sizing: border-box;
+		}
+
+		.footer {
+			color: white;
+			background-color: #212529;
+
+			width: 100%;
+			padding: 10px 35px;
+			box-sizing: border-box;
+		}
+	</style>
+</head>
+<body>
+	{{>header}}
+	{{{body}}}
+	{{>footer}}
+</body>
+</html>

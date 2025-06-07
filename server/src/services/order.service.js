@@ -4,11 +4,28 @@ const {Order} = require("../models/Order.model");
 const {ApiError} = require("../errors/api.error");
 const {Warehouse} = require("../models/Warehouse.model");
 const {ORS_API_KEY} = require("../configs/config");
+const {emailService} = require("./email.service");
+const {EEmailActions} = require("../enums/email.enum");
 
 class OrderService {
     async create(data) {
         try {
-            return await Order.create(data)
+            const order = await Order.create(data);
+
+            const context = {
+                id: order._id,
+                name: data.name,
+                companyName: data.companyName,
+                phone: data.phone,
+                email: data.email,
+                city: data.city,
+                addresses: data.addresses.toString(),
+                message: data.message,
+            }
+
+            await emailService.sendMail(data.email, EEmailActions.ORDER_CREATED, context)
+
+            return order
         } catch (e) {
             throw new ApiError(e.message, e.status)
         }
