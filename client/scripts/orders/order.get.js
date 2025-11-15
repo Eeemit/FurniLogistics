@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('form');
-    let map, routingControl;
+    let map;
 
     form.addEventListener('submit', (event) => {
         event.preventDefault();
@@ -42,10 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     throw new Error("Недостатньо координат для побудови маршруту");
                 }
 
-                const routeCoords = coords.map(([lng, lat]) => [lat, lng]);
+                const routeCoords = coords.map(p => [p.coords[1], p.coords[0]]);
 
                 if (!map) {
-                    map = L.map('map').setView(routeCoords[0], 3);
+                    map = L.map('map').setView(routeCoords[0], 12);
 
                     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         maxZoom: 19,
@@ -58,31 +58,47 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
 
-                if (routingControl) {
-                    map.removeControl(routingControl);
+                // Додаємо стрілки (потрібно підключити PolylineDecorator)
+                const colors = ['blue', 'orange', 'purple', 'green']; // для чергування
+
+                for (let i = 0; i < routeCoords.length - 1; i++) {
+                    const segment = [routeCoords[i], routeCoords[i + 1]];
+                    const color = colors[i % colors.length]; // чергування кольорів
+
+                    const polyline = L.polyline(segment, { color: color, weight: 5 }).addTo(map);
+
+                    // Додаємо стрілки для цього сегмента
+                    L.polylineDecorator(polyline, {
+                        patterns: [
+                            {
+                                offset: "10%",
+                                repeat: 0,
+                                symbol: L.Symbol.arrowHead({
+                                    pixelSize: 10,
+                                    polygon: true,
+                                    pathOptions: { color: color, fillOpacity: 1, weight: 0 }
+                                })
+                            }
+                        ]
+                    }).addTo(map);
                 }
 
-                routingControl = L.Routing.control({
-                    waypoints: routeCoords.map(coord => L.latLng(coord[0], coord[1])),
-                    lineOptions: {
-                        styles: [{ color: 'blue', weight: 5 }]
-                    },
-                    routeWhileDragging: false,
-                    draggableWaypoints: false,
-                    addWaypoints: false,
-                    show: false
-                }).addTo(map);
+                // Додаємо маркери на точки з label
+                coords.forEach(point => {
+                    if (!point.label) return;
 
-                routingControl.on('routesfound', function (e) {
-                    const route = e.routes[0];
+                    // Визначаємо колір
+                    let color = 'gray';
+                    if (point.label === 'start') color = 'green';
+                    else if (point.label.startsWith('job')) color = 'red';
 
-                    let latLngs = [];
-                    route.coordinates.forEach(coord => {
-                        latLngs.push(L.latLng(coord.lat, coord.lng));
-                    });
-
-                    let bounds = L.latLngBounds(latLngs);
-                    map.fitBounds(bounds);
+                    // Додаємо маркер
+                    L.circleMarker([point.coords[1], point.coords[0]], {
+                        radius: 8,
+                        color: color,
+                        fillColor: color,
+                        fillOpacity: 1
+                    }).addTo(map).bindPopup(point.label);
                 });
             })
             .catch(err => {

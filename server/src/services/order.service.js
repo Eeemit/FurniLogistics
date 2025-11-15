@@ -47,27 +47,43 @@ class OrderService {
                 const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(addr)}&format=json&limit=1`;
                 const res = await axios.get(url, {headers: {'User-Agent': 'logistics-app'}});
                 const loc = res.data[0];
-                return {id: i + 1, location: [parseFloat(loc.lon), parseFloat(loc.lat)]};
+                return [parseFloat(loc.lon), parseFloat(loc.lat)];
             }));
 
             const vehicleStart = await Warehouse.findOne({city: city});
 
-            const orsRes = await axios.post(
-                'https://api.openrouteservice.org/optimization',
+            console.log(vehicleStart.coords, geocoded)
+
+            const res = await axios.post(
+                "http://127.0.0.1:5000/route",
                 {
-                    jobs: geocoded,
-                    vehicles: [{id: 1, profile:"driving-car", start: vehicleStart.coords}]
-                },
-                {
-                    headers: {
-                        Authorization: ORS_API_KEY
-                    }
+                    start: {
+                        label: "start",
+                        coords: vehicleStart.coords,
+                        city
+                    },
+                    addresses
                 }
             );
 
-            const steps = orsRes.data.routes[0].steps;
+            return res.data
 
-            return steps.filter(step => step.type !== 'end').map(step => step.location);
+            // const orsRes = await axios.post(
+            //     'https://api.openrouteservice.org/optimization',
+            //     {
+            //         jobs: geocoded,
+            //         vehicles: [{id: 1, profile:"driving-car", start: vehicleStart.coords}]
+            //     },
+            //     {
+            //         headers: {
+            //             Authorization: ORS_API_KEY
+            //         }
+            //     }
+            // );
+            //
+            // const steps = orsRes.data.routes[0].steps;
+            //
+            // return steps.filter(step => step.type !== 'end').map(step => step.location);
         } catch (e) {
             throw new ApiError(e.message, e.status)
         }
