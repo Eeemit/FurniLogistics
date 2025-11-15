@@ -29,7 +29,7 @@ def compute_full_route(start, addresses):
     for i, addr in enumerate(addresses):
         coords = geocode_address(addr, start["city"])
         jobs.append({
-            "label": f"job{i+1}",
+            "label": addr,
             "coords": coords
         })
 

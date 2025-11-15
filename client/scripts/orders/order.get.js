@@ -88,10 +88,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!point.label) return;
 
                     // Визначаємо колір
-                    let color = 'gray';
+                    let color = 'cyan';
                     if (point.label === 'start') color = 'green';
-                    else if (point.label.startsWith('job')) color = 'red';
-
                     // Додаємо маркер
                     L.circleMarker([point.coords[1], point.coords[0]], {
                         radius: 8,
